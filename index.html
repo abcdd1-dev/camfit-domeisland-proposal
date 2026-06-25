@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>캠핏 × 돔아일랜드 협력 제안 | 돔형 글램핑 서비스</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#0e1b2e;
+    --navy-2:#16263f;
+    --teal:#1fb8a6;
+    --teal-d:#0e9c8c;
+    --emerald:#27c498;
+    --gold:#f4b740;
+    --ink:#1d2733;
+    --muted:#5b6b7c;
+    --line:#e6ecf2;
+    --bg:#f6f9fb;
+    --white:#ffffff;
+    --radius:18px;
+    --shadow:0 12px 40px rgba(14,27,46,.10);
+    --shadow-sm:0 4px 18px rgba(14,27,46,.07);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.65;letter-spacing:-.01em;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .section{padding:84px 0}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:700;letter-spacing:.08em;
+    color:var(--teal-d);background:rgba(31,184,166,.10);
+    padding:7px 16px;border-radius:999px;text-transform:uppercase;
+  }
+  h2.title{font-size:34px;font-weight:800;line-height:1.3;margin:18px 0 14px;color:var(--navy)}
+  h2.title .accent{color:var(--teal-d)}
+  .lead{font-size:17px;color:var(--muted);max-width:680px}
+  .center{text-align:center}
+  .center .lead{margin-left:auto;margin-right:auto}
+
+  /* ===== Top bar ===== */
+  .topbar{
+    position:sticky;top:0;z-index:50;background:rgba(14,27,46,.92);
+    backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;font-size:16px}
+  .brand .x{color:var(--teal);font-weight:400}
+  .brand .badge{font-size:11px;font-weight:600;color:#9fb0c2;border:1px solid rgba(255,255,255,.18);padding:3px 9px;border-radius:999px}
+  .topnav{display:flex;gap:26px}
+  .topnav a{color:#c3cedb;text-decoration:none;font-size:14px;font-weight:500;transition:.2s}
+  .topnav a:hover{color:#fff}
+  @media(max-width:860px){.topnav{display:none}}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;color:#fff;overflow:hidden;
+    background:radial-gradient(1200px 600px at 75% -10%,rgba(31,184,166,.32),transparent 60%),
+               linear-gradient(160deg,#0b1626 0%,#13263f 55%,#0e1b2e 100%);
+  }
+  .hero .wrap{padding-top:96px;padding-bottom:96px;position:relative;z-index:2}
+  .hero .eyebrow{background:rgba(31,184,166,.18);color:#7fe6d6}
+  .hero h1{font-size:46px;font-weight:800;line-height:1.22;margin:22px 0 18px}
+  .hero h1 .hl{
+    background:linear-gradient(120deg,#2fe3c8,#f4b740);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{font-size:18px;color:#c8d4e0;max-width:600px}
+  .hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;padding:15px 28px;border-radius:12px;
+    font-weight:700;font-size:15px;text-decoration:none;transition:.22s;border:none;cursor:pointer;
+  }
+  .btn-primary{background:linear-gradient(120deg,var(--teal),var(--teal-d));color:#fff;box-shadow:0 10px 30px rgba(31,184,166,.35)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(31,184,166,.45)}
+  .btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.2)}
+  .btn-ghost:hover{background:rgba(255,255,255,.16)}
+  .hero-domes{
+    position:absolute;right:-40px;bottom:0;width:46%;max-width:560px;z-index:1;opacity:.92;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 22%);
+    mask-image:linear-gradient(90deg,transparent,#000 22%);
+  }
+  .hero-domes img{width:100%;display:block;border-radius:18px 0 0 0}
+  @media(max-width:860px){.hero h1{font-size:33px}.hero-domes{display:none}.hero p{max-width:none}}
+
+  /* ===== Stat strip ===== */
+  .stats{background:var(--navy-2);color:#fff;padding:0}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .stat{padding:30px 18px;text-align:center;border-right:1px solid rgba(255,255,255,.08)}
+  .stat:last-child{border-right:none}
+  .stat .n{font-size:34px;font-weight:800;color:#3ee0c6;line-height:1}
+  .stat .n small{font-size:18px}
+  .stat .l{font-size:13.5px;color:#aab8c7;margin-top:9px}
+  @media(max-width:680px){.stats .wrap{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:none}.stat{border-bottom:1px solid rgba(255,255,255,.08)}}
+
+  /* ===== generic cards ===== */
+  .grid{display:grid;gap:22px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:860px){.g3,.g2{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-sm)}
+  .card .ico{
+    width:48px;height:48px;border-radius:13px;display:grid;place-items:center;font-size:23px;
+    background:linear-gradient(135deg,rgba(31,184,166,.14),rgba(244,183,64,.14));margin-bottom:16px;
+  }
+  .card h3{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:8px}
+  .card p{font-size:14.5px;color:var(--muted)}
+
+  .alt{background:#fff}
+  .alt-dark{background:linear-gradient(160deg,#0e1b2e,#16263f);color:#fff}
+  .alt-dark .title{color:#fff}
+  .alt-dark .lead{color:#bccadb}
+  .alt-dark .eyebrow{background:rgba(31,184,166,.2);color:#7fe6d6}
+
+  /* ===== definition box ===== */
+  .defbox{
+    background:linear-gradient(135deg,#fff,#f3faf8);border:1px solid var(--line);border-left:5px solid var(--teal);
+    border-radius:var(--radius);padding:32px 34px;box-shadow:var(--shadow-sm);
+  }
+  .defbox .q{font-size:14px;font-weight:700;color:var(--teal-d);margin-bottom:8px}
+  .defbox p{font-size:20px;font-weight:700;color:var(--navy);line-height:1.55}
+  .defbox p .u{background:linear-gradient(transparent 60%,rgba(244,183,64,.45) 60%)}
+
+  /* ===== flow diagram ===== */
+  .flow{
+    display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:0;
+    margin-top:10px;
+  }
+  .node{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:22px 18px;text-align:center;position:relative;
+  }
+  .node.is-camfit{border-color:var(--teal);box-shadow:0 8px 26px rgba(31,184,166,.18)}
+  .node.is-partner{border-color:var(--gold);box-shadow:0 8px 26px rgba(244,183,64,.18)}
+  .node .role{font-size:12px;font-weight:700;letter-spacing:.05em;color:var(--muted);text-transform:uppercase}
+  .node .who{font-size:19px;font-weight:800;color:var(--navy);margin:6px 0 10px}
+  .node ul{list-style:none;text-align:left;display:inline-block}
+  .node li{font-size:13.5px;color:var(--ink);padding:4px 0 4px 20px;position:relative}
+  .node li::before{content:"✓";position:absolute;left:0;color:var(--teal-d);font-weight:800}
+  .arrow{display:grid;place-items:center;padding:0 8px;color:var(--teal);font-size:26px;font-weight:800}
+  .arrow span{display:block;transform:scaleY(.9)}
+  @media(max-width:860px){
+    .flow{grid-template-columns:1fr}
+    .arrow{transform:rotate(90deg);padding:6px 0}
+  }
+  .flow-center{ text-align:center; margin-top:26px; font-size:15px; color:var(--muted) }
+  .flow-center b{color:var(--navy)}
+
+  /* ===== compare table ===== */
+  .ctable{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--line)}
+  .ctable th,.ctable td{padding:16px 20px;text-align:left;font-size:14.5px;border-bottom:1px solid var(--line)}
+  .ctable thead th{background:var(--navy);color:#fff;font-weight:700;font-size:14px}
+  .ctable thead th.hl{background:var(--teal-d)}
+  .ctable tbody tr:last-child td{border-bottom:none}
+  .ctable td:first-child{font-weight:700;color:var(--navy);background:#fafcfd;width:24%}
+  .ctable .new{color:var(--teal-d);font-weight:600}
+  .ctable td.col-new{background:rgba(31,184,166,.04)}
+  @media(max-width:680px){.ctable{font-size:13px}.ctable th,.ctable td{padding:12px 12px}}
+
+  /* ===== product ===== */
+  .prod{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}
+  @media(max-width:860px){.prod{grid-template-columns:1fr}}
+  .prod-img{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  .prod-img img{width:100%;display:block}
+  .gallery{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:34px}
+  .gallery figure{border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);position:relative}
+  .gallery img{width:100%;height:100%;object-fit:cover;display:block}
+  .gallery figcaption{
+    position:absolute;left:0;bottom:0;right:0;padding:14px 16px;color:#fff;font-size:13.5px;font-weight:600;
+    background:linear-gradient(transparent,rgba(11,22,38,.82));
+  }
+  .specs{list-style:none}
+  .specs li{display:flex;gap:14px;padding:13px 0;border-bottom:1px dashed var(--line);font-size:15px}
+  .specs li:last-child{border-bottom:none}
+  .specs .k{min-width:108px;font-weight:700;color:var(--teal-d)}
+  .specs .v{color:var(--ink)}
+  .matgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+  @media(max-width:680px){.matgrid{grid-template-columns:1fr}}
+  .matgrid .m{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .matgrid .m b{display:block;color:var(--navy);font-size:14.5px;margin-bottom:3px}
+  .matgrid .m span{font-size:13px;color:var(--muted)}
+
+  /* ===== marketing list ===== */
+  .mk{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;counter-reset:mk}
+  @media(max-width:860px){.mk{grid-template-columns:repeat(2,1fr)}}
+  .mk .item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:22px 16px;text-align:center}
+  .mk .item .num{font-size:13px;font-weight:800;color:var(--gold)}
+  .mk .item .t{font-size:15px;font-weight:700;color:#fff;margin-top:8px}
+  .mk .item .d{font-size:12.5px;color:#aab8c7;margin-top:6px}
+
+  /* ===== steps ===== */
+  .steps{counter-reset:st;display:grid;gap:14px}
+  .step{display:flex;gap:18px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow-sm)}
+  .step .n{
+    flex:0 0 auto;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;
+    background:linear-gradient(135deg,var(--teal),var(--teal-d));
+  }
+  .step .c h4{font-size:16px;color:var(--navy);font-weight:700}
+  .step .c p{font-size:14px;color:var(--muted);margin-top:3px}
+
+  /* ===== benefit ===== */
+  .benefit{display:flex;gap:16px;align-items:flex-start}
+  .benefit .b-ico{flex:0 0 auto;width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,rgba(31,184,166,.16),rgba(39,196,152,.16))}
+  .benefit h3{font-size:18px;color:var(--navy);margin-bottom:6px}
+  .benefit p{font-size:14.5px;color:var(--muted)}
+
+  /* ===== CTA ===== */
+  .cta{
+    background:radial-gradient(900px 400px at 80% 0%,rgba(31,184,166,.3),transparent 55%),linear-gradient(150deg,#0b1626,#15273f);
+    color:#fff;border-radius:26px;padding:60px 40px;text-align:center;box-shadow:var(--shadow);
+  }
+  .cta h2{font-size:32px;font-weight:800;margin-bottom:14px}
+  .cta p{color:#c5d2df;font-size:17px;max-width:560px;margin:0 auto 30px}
+
+  footer{background:var(--navy);color:#8ea0b3;padding:40px 0;font-size:13.5px}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  footer b{color:#fff}
+
+  .pill{display:inline-block;font-size:12px;font-weight:700;color:var(--gold);background:rgba(244,183,64,.14);padding:5px 12px;border-radius:999px;margin-bottom:14px}
+
+  /* ===== Print / PDF ===== */
+  @media print{
+    *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+    @page{ size:A4; margin:0; }
+    html,body{ background:#fff; }
+    .topbar{ display:none !important; }
+    .wrap{ max-width:none; padding:0 40px; }
+    .section{ padding:46px 0; break-inside:auto; }
+    .hero .wrap{ padding-top:60px; padding-bottom:60px; }
+    .hero-domes{ opacity:.9; }
+    /* keep blocks from splitting across pages */
+    .card,.node,.step,.defbox,.benefit,.matgrid .m,
+    .mk .item,.gallery figure,.cta,.ctable tr{ break-inside:avoid; page-break-inside:avoid; }
+    .flow,.prod,.grid{ break-inside:avoid; }
+    h2.title,h3{ break-after:avoid; }
+    /* start major sections on a fresh page for clean handouts */
+    #model,#propose,#offer,#product,#process{ break-before:page; }
+    a{ color:inherit; text-decoration:none; }
+    .hero-cta,.topnav{ display:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand">camfit <span class="x">×</span> 돔아일랜드 <span class="badge">협력 제안서</span></div>
+    <nav class="topnav">
+      <a href="#camfit">캠핏 소개</a>
+      <a href="#model">이지캠핑 모델</a>
+      <a href="#propose">협력 구조</a>
+      <a href="#offer">제안 내용</a>
+      <a href="#product">돔 제품</a>
+      <a href="#process">진행 절차</a>
+    </nav>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-domes"><img src="images/dome-night.png" alt="돔아일랜드 야간 글램핑" /></div>
+  <div class="wrap">
+    <span class="eyebrow">Partnership Proposal</span>
+    <h1>캠핏이 제안하는<br /><span class="hl">돔형 글램핑</span> 협력 사업</h1>
+    <p>검증된 <b style="color:#fff">‘이지캠핑’ 모델</b>을 돔아일랜드의 돔 제품과 결합합니다.
+       프리미엄 돔 글램핑을 하나의 서비스 상품으로 기획하고, 캠핏 플랫폼으로 전국 캠핑장에 확산합니다.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#propose">협력 구조 보기 →</a>
+      <a class="btn btn-ghost" href="#model">이지캠핑이 뭔가요?</a>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stat"><div class="n">56<small>개</small></div><div class="l">이지캠핑 운영 캠핑장</div></div>
+    <div class="stat"><div class="n">192<small>개</small></div><div class="l">검증된 운영 사이트</div></div>
+    <div class="stat"><div class="n">+33.5<small>%</small></div><div class="l">평균 가동률 상승</div></div>
+    <div class="stat"><div class="n">+88<small>%</small></div><div class="l">최대 가동률 증가</div></div>
+  </div>
+</section>
+
+<!-- CAMFIT INTRO -->
+<section class="section" id="camfit">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">About Camfit</span>
+      <h2 class="title">캠핏은 <span class="accent">국내 1위 캠핑 예약 플랫폼</span>입니다</h2>
+      <p class="lead">전국 캠핑장과 캠퍼를 연결하는 No.1 예약·운영 플랫폼으로, 단순 중개를 넘어
+        캠핑장의 가동률을 끌어올리는 ‘상품 기획 + 마케팅 생태계’를 직접 운영합니다.
+        돔아일랜드의 제품을 <b>전국 캠핑장으로 유통할 수 있는 가장 빠른 길</b>입니다.</p>
+    </div>
+
+    <!-- WHY #1 : pillars -->
+    <div class="grid g2" style="margin-top:46px">
+      <div class="card" style="border-top:4px solid var(--teal)">
+        <div class="ico">🏕️</div>
+        <h3>국내 최대 규모의 캠핑장 네트워크</h3>
+        <p>전국 캠핑장과 직접 연결된 유통·예약망을 보유해, 신규 글램핑 상품을 단기간에 다수 캠핑장으로 확산할 수 있습니다.</p>
+      </div>
+      <div class="card" style="border-top:4px solid var(--gold)">
+        <div class="ico">📱</div>
+        <h3>압도적 캠퍼 트래픽 · 1위 브랜드 인지도</h3>
+        <p>캠핑을 검색·예약하는 핵심 수요층이 매일 캠핏 앱에 모입니다. 돔 글램핑을 ‘구매 수요’ 앞에 직접 노출합니다.</p>
+      </div>
+      <div class="card" style="border-top:4px solid var(--teal)">
+        <div class="ico">🧩</div>
+        <h3>검증된 상품화 역량 (이지캠핑)</h3>
+        <p>장비·시설을 하나의 서비스 상품으로 패키징해 56개 캠핑장에 도입·운영한 실제 레퍼런스를 보유하고 있습니다.</p>
+      </div>
+      <div class="card" style="border-top:4px solid var(--gold)">
+        <div class="ico">📈</div>
+        <h3>데이터 기반 운영 · 정산 인프라</h3>
+        <p>예약·가동률·정산을 한 시스템에서 운영합니다. 어떤 상품이 어디서 성과를 내는지 데이터로 검증하고 확산합니다.</p>
+      </div>
+    </div>
+
+    <!-- highlight band -->
+    <div style="margin-top:30px;background:linear-gradient(135deg,#0e1b2e,#16263f);border-radius:var(--radius);padding:30px 34px;color:#fff;display:flex;align-items:center;gap:22px;flex-wrap:wrap;box-shadow:var(--shadow)">
+      <div style="font-size:30px">🏆</div>
+      <div style="flex:1;min-width:240px">
+        <div style="font-weight:800;font-size:18px;margin-bottom:4px">“만드는 회사”와 “파는 회사”의 결합</div>
+        <p style="color:#bccadb;font-size:14.5px;margin:0">돔아일랜드는 최고의 돔 제품을 만들고, 캠핏은 그 제품을 전국 캠핑장에 ‘팔리는 글램핑 상품’으로 만들어 유통합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IS EASYCAMP (model explained) -->
+<section class="section alt-dark" id="model">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">검증된 모델</span>
+      <h2 class="title">먼저, ‘이지캠핑’이 어떻게 작동하는지 설명드립니다</h2>
+      <p class="lead">돔아일랜드와의 협력 구조를 이해하시려면, 캠핏이 이미 운영 중인 이지캠핑 모델을 보시는 것이 가장 빠릅니다.</p>
+    </div>
+
+    <div class="defbox" style="margin-top:40px">
+      <div class="q">이지캠핑이란?</div>
+      <p>타프를 포함한 <span class="u">풀 캠핑 장비를 캠핑장에 설치</span>하여,
+         고객이 개인 장비 없이도 더 쉽게 캠핑을 즐길 수 있게 만든 <span class="u">‘준비된 캠핑’ 서비스</span>입니다.</p>
+    </div>
+
+    <h3 style="text-align:center;color:#fff;font-size:21px;margin:54px 0 8px">이지캠핑의 3자 협력 구조</h3>
+    <p style="text-align:center;color:#bccadb;margin-bottom:28px">세 주체가 각자 잘하는 역할을 맡고, 캠퍼에게는 하나의 완성된 서비스로 제공됩니다.</p>
+
+    <div class="flow">
+      <div class="node is-partner">
+        <div class="role">장비 파트너</div>
+        <div class="who">스노우라인</div>
+        <ul>
+          <li>프리미엄 장비 공급</li>
+          <li>설치 · 관리 · A/S</li>
+          <li>약 500만원 상당 무상</li>
+        </ul>
+      </div>
+      <div class="arrow"><span>→</span></div>
+      <div class="node is-camfit">
+        <div class="role">플랫폼</div>
+        <div class="who">캠핏</div>
+        <ul>
+          <li>상품 기획 · 운영</li>
+          <li>앱 노출 · 마케팅</li>
+          <li>예약 · 데이터 관리</li>
+        </ul>
+      </div>
+      <div class="arrow"><span>→</span></div>
+      <div class="node">
+        <div class="role">운영 주체</div>
+        <div class="who">캠핑장 사장님</div>
+        <ul>
+          <li>공간 제공 · 운영</li>
+          <li>초기 비용 부담 ↓</li>
+          <li>가동률 · 매출 ↑</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flow-center">→ 최종적으로 <b>캠퍼</b>는 장비 없이 방문해 ‘준비된 캠핑’을 경험하고, 모두가 이익을 얻습니다.</div>
+  </div>
+</section>
+
+<!-- WHY (benefits / proof) -->
+<section class="section">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Why it works</span>
+      <h2 class="title">이지캠핑이 만든 <span class="accent">실제 성과</span></h2>
+      <p class="lead">192개 사이트에서 검증된 결과 — 전체 가동률이 61%에서 72%로 상승했고, 일부 캠핑장은 최대 88%까지 증가했습니다.</p>
+    </div>
+    <div class="grid g3" style="margin-top:42px">
+      <div class="benefit card">
+        <div class="b-ico">💰</div>
+        <div><h3>초기 비용 부담 감소</h3><p>고가의 프리미엄 장비를 파트너가 무상 설치 → 사장님의 초기 자본 투자 최소화.</p></div>
+      </div>
+      <div class="benefit card">
+        <div class="b-ico">🛠️</div>
+        <div><h3>운영 부담 완화</h3><p>장비 설치·관리·A/S를 파트너가 전담 → 사장님은 캠핑장 운영에만 집중.</p></div>
+      </div>
+      <div class="benefit card">
+        <div class="b-ico">📣</div>
+        <div><h3>통합 마케팅 지원</h3><p>캠핏 앱의 큐레이션·배너·기획전·검색 노출로 예약과 가동률을 끌어올림.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPOSAL: Dome Island -->
+<section class="section alt" id="propose">
+  <div class="wrap">
+    <div class="center">
+      <span class="pill">NEW · 신규 제안</span>
+      <h2 class="title">이제 이 모델을 <span class="accent">돔아일랜드와 함께</span> 만듭니다</h2>
+      <p class="lead">기존 이지캠핑이 ‘텐트 장비’를 상품화했다면, 이번에는 돔아일랜드의 <b>돔 제품</b>으로
+        한 단계 위의 <b>프리미엄 돔 글램핑</b>을 새로운 서비스 유형으로 기획합니다.</p>
+    </div>
+
+    <h3 style="text-align:center;font-size:20px;color:var(--navy);margin:50px 0 8px">제안하는 협력 구조</h3>
+    <p style="text-align:center;color:var(--muted);margin-bottom:26px">스노우라인이 맡았던 ‘장비 파트너’ 자리를, <b style="color:var(--teal-d)">돔아일랜드</b>가 ‘돔 글램핑 파트너’로 맡습니다.</p>
+
+    <div class="flow">
+      <div class="node is-partner">
+        <div class="role">돔 글램핑 파트너</div>
+        <div class="who">돔아일랜드</div>
+        <ul>
+          <li>돔 제품 공급</li>
+          <li>설치 · 시공 · 품질 관리</li>
+          <li>제품 사양 · A/S 지원</li>
+        </ul>
+      </div>
+      <div class="arrow"><span>→</span></div>
+      <div class="node is-camfit">
+        <div class="role">플랫폼</div>
+        <div class="who">캠핏</div>
+        <ul>
+          <li>돔 글램핑 상품 기획</li>
+          <li>앱 노출 · 마케팅</li>
+          <li>예약 · 운영 · 데이터</li>
+        </ul>
+      </div>
+      <div class="arrow"><span>→</span></div>
+      <div class="node">
+        <div class="role">운영 주체</div>
+        <div class="who">캠핑장 사장님</div>
+        <ul>
+          <li>공간 제공 · 운영</li>
+          <li>신규 글램핑 상품 도입</li>
+          <li>객단가 · 가동률 ↑</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flow-center">→ <b>캠퍼</b>는 사계절 쾌적한 ‘돔 글램핑’이라는 새로운 경험을 예약하게 됩니다.</div>
+
+    <!-- compare table -->
+    <h3 style="text-align:center;font-size:20px;color:var(--navy);margin:62px 0 22px">한눈에 보는 기존 vs 신규</h3>
+    <table class="ctable">
+      <thead>
+        <tr>
+          <th style="width:24%">구분</th>
+          <th>기존 — 이지캠핑</th>
+          <th class="hl">신규 — 돔 글램핑 (제안)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>장비/제품 파트너</td><td>스노우라인 (캠핑 장비)</td><td class="col-new new">돔아일랜드 (돔 글램핑 제품)</td></tr>
+        <tr><td>서비스 유형</td><td>준비된 캠핑 (풀 장비)</td><td class="col-new new">프리미엄 돔 글램핑</td></tr>
+        <tr><td>제품 형태</td><td>텐트 · 타프 · 캠핑 가구</td><td class="col-new new">HDPE 돔 구조물 + 인테리어</td></tr>
+        <tr><td>차별점</td><td>장비 없이 쉬운 캠핑</td><td class="col-new new">사계절 쾌적 · 비주얼 · 객단가</td></tr>
+        <tr><td>캠핏 역할</td><td>상품 기획 · 마케팅 · 예약</td><td class="col-new new">동일 (검증된 운영 그대로 적용)</td></tr>
+        <tr><td>캠핑장 혜택</td><td>가동률 상승</td><td class="col-new new">신규 상품 + 객단가 + 가동률</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ROLE detail -->
+<section class="section">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Role Split</span>
+      <h2 class="title">역할 분담 — <span class="accent">각자 가장 잘하는 것</span></h2>
+    </div>
+    <div class="grid g2" style="margin-top:42px">
+      <div class="card" style="border-top:4px solid var(--gold)">
+        <div class="ico">🏗️</div>
+        <h3>돔아일랜드가 맡는 것</h3>
+        <p style="margin-bottom:12px">돔 글램핑의 ‘하드웨어’를 책임집니다.</p>
+        <ul class="specs" style="margin-top:4px">
+          <li><span class="k">제품</span><span class="v">돔 구조물 공급 · 옵션 구성</span></li>
+          <li><span class="k">시공</span><span class="v">현장 설치 · 시공 · 안전 검수</span></li>
+          <li><span class="k">품질</span><span class="v">제품 사양 보증 · A/S 지원</span></li>
+        </ul>
+      </div>
+      <div class="card" style="border-top:4px solid var(--teal)">
+        <div class="ico">🚀</div>
+        <h3>캠핏이 맡는 것</h3>
+        <p style="margin-bottom:12px">돔 글램핑의 ‘상품화와 판매’를 책임집니다.</p>
+        <ul class="specs" style="margin-top:4px">
+          <li><span class="k">기획</span><span class="v">돔 글램핑 서비스 상품 설계</span></li>
+          <li><span class="k">유통</span><span class="v">전국 캠핑장 발굴 · 매칭 · 도입</span></li>
+          <li><span class="k">마케팅</span><span class="v">앱 노출 · 예약 · 데이터 운영</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE OFFER DOME ISLAND -->
+<section class="section alt-dark" id="offer">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Our Proposal</span>
+      <h2 class="title">캠핏이 돔아일랜드에 제안하는 것</h2>
+      <p class="lead">제품은 돔아일랜드가, 판로와 운영은 캠핏이. 돔아일랜드는 ‘제조’에만 집중하시고
+        나머지 전 과정을 캠핏이 함께 책임집니다.</p>
+    </div>
+    <div class="grid g3" style="margin-top:44px">
+      <div class="card" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12)">
+        <div class="ico">🛣️</div>
+        <h3 style="color:#fff">① 전국 유통 판로</h3>
+        <p style="color:#bccadb">개별 영업 없이 캠핏 네트워크를 통해 전국 캠핑장에 돔 제품을 도입할 수 있는 안정적 판로를 엽니다.</p>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12)">
+        <div class="ico">🧩</div>
+        <h3 style="color:#fff">② 돔 글램핑 상품 공동 기획</h3>
+        <p style="color:#bccadb">제품을 단순 판매가 아닌 ‘예약되는 글램핑 상품’으로 기획·브랜딩합니다. (패키지·가격·운영안 설계)</p>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12)">
+        <div class="ico">📣</div>
+        <h3 style="color:#fff">③ 앱 마케팅 노출 패키지</h3>
+        <p style="color:#bccadb">큐레이션·배너·기획전·검색 노출 등 캠핏 앱의 마케팅 자산을 돔 글램핑 상품에 투입합니다.</p>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12)">
+        <div class="ico">⚙️</div>
+        <h3 style="color:#fff">④ 예약 · 정산 · 운영 인프라</h3>
+        <p style="color:#bccadb">예약 접수부터 정산까지 캠핏 시스템으로 일괄 운영해, 별도 시스템 구축 부담이 없습니다.</p>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12)">
+        <div class="ico">🔬</div>
+        <h3 style="color:#fff">⑤ 파일럿 → 데이터 검증</h3>
+        <p style="color:#bccadb">소수 캠핑장에서 먼저 검증하고, 성과 데이터를 근거로 리스크 없이 단계적으로 확산합니다.</p>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12)">
+        <div class="ico">🤝</div>
+        <h3 style="color:#fff">⑥ 공동 브랜딩 · PR</h3>
+        <p style="color:#bccadb">‘캠핏 × 돔아일랜드’ 공동 브랜드로 노출해, 돔아일랜드의 시장 인지도까지 함께 끌어올립니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section class="section alt" id="product">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Dome Island Product</span>
+      <h2 class="title">왜 <span class="accent">돔아일랜드</span>의 돔인가</h2>
+      <p class="lead">고밀도 폴리에틸렌(HDPE) 기반의 견고한 돔 구조물. 사계절 쾌적함과 독보적인 비주얼로
+        글램핑 상품으로서의 경쟁력을 갖추고 있습니다.</p>
+    </div>
+
+    <div class="prod" style="margin-top:44px">
+      <div class="prod-img"><img src="images/dome-day.png" alt="돔아일랜드 주간 전경" /></div>
+      <div>
+        <ul class="specs">
+          <li><span class="k">규모</span><span class="v">높이 3.5m · 지름 5.5m · 면적 약 22.5㎡</span></li>
+          <li><span class="k">소재</span><span class="v">고밀도 폴리에틸렌 HDPE (UV 안정제 6%)</span></li>
+          <li><span class="k">단열</span><span class="v">외벽 약 10cm 공기층 · 두께 5T</span></li>
+          <li><span class="k">내구성</span><span class="v">중량 약 800kg · 우수한 내후성</span></li>
+          <li><span class="k">내한</span><span class="v">−40℃ 환경까지 대응 가능</span></li>
+        </ul>
+        <div class="matgrid">
+          <div class="m"><b>견고함</b><span>강성 높은 HDPE 단일 구조로 변형에 강함</span></div>
+          <div class="m"><b>사계절</b><span>공기층 단열로 여름·겨울 모두 쾌적</span></div>
+          <div class="m"><b>비주얼</b><span>곡면 돔 + LED 무드 조명의 압도적 연출</span></div>
+          <div class="m"><b>친환경</b><span>재사용·재활용 가능한 소재 구성</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery">
+      <figure><img src="images/dome-night.png" alt="돔 야간 LED 연출" /><figcaption>야간 LED 무드 조명 — 글램핑 상품으로서의 비주얼 경쟁력</figcaption></figure>
+      <figure><img src="images/dome-spec.png" alt="돔아일랜드 제품 특징 및 사양" /><figcaption>제품 사양 및 구성 상세</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETING SUPPORT -->
+<section class="section alt-dark">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Camfit Marketing</span>
+      <h2 class="title">캠핏이 ‘돔 글램핑’을 이렇게 노출합니다</h2>
+      <p class="lead">이지캠핑에서 검증된 5가지 마케팅 노출 전략을 돔 글램핑 상품에 그대로 적용합니다.</p>
+    </div>
+    <div class="mk" style="margin-top:40px">
+      <div class="item"><div class="num">01</div><div class="t">전용 큐레이션</div><div class="d">돔 글램핑 전용 페이지</div></div>
+      <div class="item"><div class="num">02</div><div class="t">메인 배너</div><div class="d">앱 핵심 영역 노출</div></div>
+      <div class="item"><div class="num">03</div><div class="t">테마 기획전</div><div class="d">시즌·테마 기획 편성</div></div>
+      <div class="item"><div class="num">04</div><div class="t">검색 필터</div><div class="d">‘돔/글램핑’ 필터 노출</div></div>
+      <div class="item"><div class="num">05</div><div class="t">프로모션</div><div class="d">얼리버드·할인 이벤트</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="process">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Next Steps</span>
+      <h2 class="title">제안 진행 절차</h2>
+      <p class="lead">협의가 시작되면 아래 흐름으로 빠르게 파일럿을 운영하고, 성과를 확인한 뒤 확산합니다.</p>
+    </div>
+    <div class="steps" style="margin-top:40px">
+      <div class="step"><div class="n">1</div><div class="c"><h4>상호 협의 · 조건 정렬</h4><p>역할 분담, 공급·정산 조건, 상품 구성 범위를 함께 정의합니다.</p></div></div>
+      <div class="step"><div class="n">2</div><div class="c"><h4>돔 글램핑 상품 기획</h4><p>돔아일랜드 제품 사양 기반으로 캠핏이 서비스 상품(패키지·가격·운영안)을 설계합니다.</p></div></div>
+      <div class="step"><div class="n">3</div><div class="c"><h4>파일럿 캠핑장 선정 · 설치</h4><p>적합한 캠핑장을 매칭하고, 돔아일랜드가 설치·시공을 진행합니다.</p></div></div>
+      <div class="step"><div class="n">4</div><div class="c"><h4>캠핏 앱 출시 · 마케팅</h4><p>큐레이션·배너·검색 노출로 예약을 모으고 운영을 시작합니다.</p></div></div>
+      <div class="step"><div class="n">5</div><div class="c"><h4>성과 검증 · 전국 확산</h4><p>가동률·매출 데이터를 검증한 뒤 전국 캠핑장으로 모델을 확장합니다.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="wrap">
+    <div class="cta">
+      <h2>돔아일랜드와 함께,<br />돔 글램핑 시장을 열겠습니다</h2>
+      <p>검증된 이지캠핑 운영 노하우와 캠핏의 플랫폼이, 돔아일랜드의 제품을 전국 캠핑장으로 확산시킵니다.</p>
+      <a class="btn btn-primary" href="mailto:camfit.ai3@nextedition.co.kr?subject=캠핏 × 돔아일랜드 협력 제안 회신">협력 논의 시작하기 →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><b>camfit</b> × 돔아일랜드 협력 제안서 · 국내 1위 캠핑 예약 플랫폼</div>
+    <div>문의 : camfit.ai3@nextedition.co.kr</div>
+  </div>
+</footer>
+
+</body>
+</html>
